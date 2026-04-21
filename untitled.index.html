@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Giant Lottos | Win Big with International Lotteries</title>
+    <meta name="description" content="Play Powerball, Mega Millions, EuroMillions — biggest jackpots worldwide. Secure, trusted, instant payouts.">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        /* Password Overlay (only for India) */
+        .password-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.95);
+            z-index: 1000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            backdrop-filter: blur(10px);
+        }
+
+        .password-box {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            text-align: center;
+            max-width: 400px;
+            width: 90%;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+        }
+
+        .password-box h2 {
+            color: #e74c3c;
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+        }
+
+        .password-box p {
+            color: #555;
+            margin-bottom: 25px;
+        }
+
+        .password-box input {
+            width: 100%;
+            padding: 15px;
+            font-size: 1.2rem;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .password-box button {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            font-size: 1.1rem;
+            border-radius: 30px;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        .password-box button:hover {
+            background: #5a67d8;
+        }
+
+        .error-msg {
+            color: red;
+            margin-top: 10px;
+            display: none;
+        }
+
+        /* Main Content */
+        .main-content {
+            display: none;
+            cursor: pointer;
+        }
+
+        /* Full Page Clickable */
+        .clickable-area {
+            cursor: pointer;
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 60px 40px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        /* Language Selector */
+        .language-selector {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(255,255,255,0.2);
+            padding: 8px 15px;
+            border-radius: 30px;
+            backdrop-filter: blur(5px);
+        }
+
+        .language-selector select {
+            background: transparent;
+            border: none;
+            color: white;
+            font-size: 0.9rem;
+            cursor: pointer;
+        }
+
+        .language-selector option {
+            color: #333;
+        }
+
+        /* Buttons */
+        .btn-primary {
+            display: inline-block;
+            background: #ff6b35;
+            color: white;
+            padding: 15px 40px;
+            text-decoration: none;
+            font-size: 1.2rem;
+            font-weight: bold;
+            border-radius: 50px;
+            margin-top: 30px;
+            transition: transform 0.3s;
+            cursor: pointer;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+        }
+
+        /* Features */
+        .features {
+            padding: 60px 40px;
+            background: #f8f9fa;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+            transition: transform 0.3s;
+            cursor: pointer;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .feature-card h3 {
+            margin-bottom: 15px;
+            color: #333;
+        }
+
+        /* Stats */
+        .stats {
+            background: white;
+            padding: 40px;
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            text-align: center;
+        }
+
+        .stat-item {
+            cursor: pointer;
+        }
+
+        .stat-item h3 {
+            font-size: 2rem;
+            color: #667eea;
+        }
+
+        /* Footer */
+        .footer {
+            background: #1a1a2e;
+            color: #aaa;
+            padding: 40px;
+            font-size: 0.85rem;
+        }
+
+        .privacy-policy {
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid #333;
+        }
+
+        .privacy-policy h4 {
+            color: white;
+            margin-bottom: 15px;
+        }
+
+        .privacy-policy p {
+            line-height: 1.6;
+            margin-bottom: 10px;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.8rem;
+            }
+            .features {
+                padding: 40px 20px;
+            }
+            .language-selector {
+                top: 10px;
+                right: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Password Overlay (only for India) -->
+<div id="passwordOverlay" class="password-overlay">
+    <div class="password-box">
+        <h2>🔒 Access Restricted</h2>
+        <p>This website requires a valid access code for your region.</p>
+        <input type="password" id="passwordInput" placeholder="Enter access code" autofocus>
+        <button onclick="checkPassword()">Verify Access</button>
+        <p id="errorMsg" class="error-msg">❌ Incorrect code. Access denied.</p>
+    </div>
+</div>
+
+<!-- Main Content (Full Page Clickable) -->
+<div id="mainContent" class="main-content" onclick="openAffiliateLink()">
+    <!-- Language Selector -->
+    <div class="language-selector" onclick="event.stopPropagation()">
+        <div id="google_translate_element"></div>
+    </div>
+
+    <div class="header">
+        <h1>🎰 Giant Lottos</h1>
+        <p>Win Big with International Lotteries — Powerball, Mega Millions, EuroMillions</p>
+        <div class="btn-primary" onclick="openAffiliateLink(); event.stopPropagation()">🎟️ Play Now — Get Bonus 🎟️</div>
+    </div>
+
+    <div class="stats">
+        <div class="stat-item" onclick="openAffiliateLink(); event.stopPropagation()">
+            <h3>$1B+</h3>
+            <p>Total Jackpots Won</p>
+        </div>
+        <div class="stat-item" onclick="openAffiliateLink(); event.stopPropagation()">
+            <h3>5M+</h3>
+            <p>Happy Players</p>
+        </div>
+        <div class="stat-item" onclick="openAffiliateLink(); event.stopPropagation()">
+            <h3>150+</h3>
+            <p>Countries Served</p>
+        </div>
+    </div>
+
+    <div class="features">
+        <div class="features-grid">
+            <div class="feature-card" onclick="openAffiliateLink(); event.stopPropagation()">
+                <h3>💰 Win Millions</h3>
+                <p>Play Powerball, Mega Millions, EuroMillions — biggest jackpots worldwide.</p>
+            </div>
+            <div class="feature-card" onclick="openAffiliateLink(); event.stopPropagation()">
+                <h3>🌍 Global Access</h3>
+                <p>Players from UK, USA, Europe, Canada, Australia, China welcome.</p>
+            </div>
+            <div class="feature-card" onclick="openAffiliateLink(); event.stopPropagation()">
+                <h3>🔒 Secure & Trusted</h3>
+                <p>Licensed platform with SSL encryption and verified payouts.</p>
+            </div>
+            <div class="feature-card" onclick="openAffiliateLink(); event.stopPropagation()">
+                <h3>⚡ Instant Payouts</h3>
+                <p>Withdraw your winnings in 24 hours via PayPal, Bank Transfer, Crypto.</p>
+            </div>
+            <div class="feature-card" onclick="openAffiliateLink(); event.stopPropagation()">
+                <h3>📱 Mobile App</h3>
+                <p>iOS and Android apps available — play anywhere, anytime.</p>
+            </div>
+            <div class="feature-card" onclick="openAffiliateLink(); event.stopPropagation()">
+                <h3>🎁 Welcome Bonus</h3>
+                <p>Get up to $500 bonus on your first deposit.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <div class="privacy-policy">
+            <h4>📜 Privacy Policy & Legal Notice</h4>
+            <p><strong>Geo-Restriction Notice:</strong> This website is not intended for residents of India, China, Saudi Arabia, Turkey, Egypt, Italy, Bulgaria, and other jurisdictions where online lottery is prohibited. Access from these countries requires a valid access code.</p>
+            <p><strong>No Guarantee:</strong> This website does not guarantee any winnings. Lottery is a game of chance. Past performance does not guarantee future results.</p>
+            <p><strong>Affiliate Disclosure:</strong> This site contains affiliate links. We may earn a commission if you sign up through our links, at no extra cost to you.</p>
+            <p><strong>Responsible Gaming:</strong> Play responsibly. Set limits. If you feel you have a gambling problem, seek help at gamblingtherapy.org.</p>
+            <p><strong>Legal Compliance:</strong> This website complies with UK Gambling Commission regulations. Players are responsible for checking their local laws before participating.</p>
+            <p><strong>No Liability:</strong> We are not liable for any legal issues arising from accessing this site from restricted jurisdictions.</p>
+            <p><strong>Data Protection:</strong> We do not sell your personal information. Cookies are used for analytics and affiliate tracking.</p>
+            <p><strong>Age Restriction:</strong> 18+ only. Age verification may be required before withdrawal.</p>
+            <p><strong>Governing Law:</strong> These terms are governed by the laws of Gibraltar.</p>
+        </div>
+        <p style="margin-top: 20px;">© 2026 Giant Lottos | All Rights Reserved | <a href="#" style="color: #aaa;" onclick="event.stopPropagation()">Responsible Gambling</a> | <a href="#" style="color: #aaa;" onclick="event.stopPropagation()">Contact</a></p>
+    </div>
+</div>
+
+<script>
+    // Affiliate link
+    const AFFILIATE_LINK = 'https://giantlottos.com/break-the-bank?affid=69d96c30e1c86&bid=8c668c5c';
+
+    function openAffiliateLink() {
+        window.open(AFFILIATE_LINK, '_blank');
+    }
+
+    // Get user's country using IP API
+    async function getUserCountry() {
+        try {
+            const response = await fetch('https://ipapi.co/json/');
+            const data = await response.json();
+            return data.country_code;
+        } catch (error) {
+            console.error('Error detecting country:', error);
+            return 'US'; // Default to US if detection fails
+        }
+    }
+
+    // Countries that need password (India only)
+    const restrictedCountries = ['IN'];
+
+    function checkPassword() {
+        const password = document.getElementById('passwordInput').value;
+        const correctPassword = '12345678';
+        const errorMsg = document.getElementById('errorMsg');
+        
+        if (password === correctPassword) {
+            // Correct password - show content
+            document.getElementById('passwordOverlay').style.display = 'none';
+            document.getElementById('mainContent').style.display = 'block';
+            errorMsg.style.display = 'none';
+        } else {
+            // Wrong password
+            errorMsg.style.display = 'block';
+            document.getElementById('passwordInput').value = '';
+            document.getElementById('passwordInput').focus();
+        }
+    }
+
+    async function checkAccess() {
+        const countryCode = await getUserCountry();
+        
+        if (restrictedCountries.includes(countryCode)) {
+            // Show password overlay for India
+            document.getElementById('passwordOverlay').style.display = 'flex';
+            document.getElementById('mainContent').style.display = 'none';
+        } else {
+            // Direct access for other countries
+            document.getElementById('passwordOverlay').style.display = 'none';
+            document.getElementById('mainContent').style.display = 'block';
+        }
+    }
+
+    // Enter key support for password input
+    document.getElementById('passwordInput').addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') {
+            checkPassword();
+        }
+    });
+
+    // Run on page load
+    checkAccess();
+</script>
+
+<!-- Google Translate for multi-language support -->
+<script type="text/javascript">
+    function googleTranslateElementInit() {
+        new google.translate.TranslateElement({
+            pageLanguage: 'en',
+            includedLanguages: 'en,hi,zh-CN,es,fr,de,ar,ru,ja,ko,pt',
+            layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+        }, 'google_translate_element');
+    }
+</script>
+<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+</body>
+</html>
